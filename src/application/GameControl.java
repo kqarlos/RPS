@@ -9,61 +9,66 @@ import java.util.Scanner;
 public class GameControl {
 
 	public static void main(String[] args) {
-
+		RPSDisplayer displayer = new RPSDisplayer();
 		int rounds = Integer.parseInt(args[0]);
 		int currentRound = 1;
 		String input;
 		Random rand = new Random();
-		char[] weapons = { 'r', 'p', 's' };
+		String[] weapons = { "r", "p", "s" };
 		int userScore = 0;
 		int cpuScore = 0;
-
+		displayer.printIntroMessage();
 		while (currentRound <= rounds) {
 			Scanner scan = new Scanner(System.in);
-			System.out.println("Round " + currentRound);
+			displayer.printRoundMessage(currentRound);
 
 			input = scan.nextLine();
-			char cpuWeapon = weapons[rand.nextInt(3)];
-			System.out.println("Your weapon: " + input);
-			System.out.println("CPU's weapon: " + cpuWeapon);
-			if (input.equals("r")) {
-				if (cpuWeapon == 'r') {
-					System.out.println("TIE!");
-				} else if (cpuWeapon == 'p') {
-					System.out.println("LOOSE!");
-					cpuScore++;
-				} else if (cpuWeapon == 's') {
-					System.out.println("WIN!!");
-					userScore++;
+			String cpuWeapon = weapons[rand.nextInt(3)];
 
+			if (input.equals("h")) {
+				displayer.printHelpInfo();
+			} else if (input.equals("e")) {
+				currentRound = rounds+1;
+			} else if (input.equals("m")) {
+				displayer.printMatchInfo(cpuScore, userScore);
+			} else if (input.equals("r")) {
+				if (cpuWeapon.equals("r")) {
+					displayer.printTie(input);
+				} else if (cpuWeapon.equals("p")) {
+					displayer.printLoss(input, cpuWeapon);
+					cpuScore++;
+				} else if (cpuWeapon.equals("s")) {
+					displayer.printWin(input, cpuWeapon);
+					userScore++;
 				}
 			} else if (input.equals("p")) {
-				if (cpuWeapon == 'r') {
-					System.out.println("WIN!");
+				if (cpuWeapon.equals("r")) {
+					displayer.printWin(input, cpuWeapon);
 					userScore++;
-				} else if (cpuWeapon == 'p') {
-					System.out.println("TIE!");
-				} else if (cpuWeapon == 's') {
-					System.out.println("LOOSE!");
+				} else if (cpuWeapon.equals("p")) {
+					displayer.printTie(input);
+				} else if (cpuWeapon.equals("s")) {
+					displayer.printLoss(input, cpuWeapon);
 					cpuScore++;
 				}
 			} else if (input.equals("s")) {
-				if (cpuWeapon == 'r') {
-					System.out.println("LOOSE!");
+				if (cpuWeapon.equals("r")) {
+					displayer.printLoss(input, cpuWeapon);
 					cpuScore++;
-				} else if (cpuWeapon == 'p') {
-					System.out.println("WIN!");
+				} else if (cpuWeapon.equals("p")) {
+					displayer.printWin(input, cpuWeapon);
 					userScore++;
-				} else if (cpuWeapon == 's') {
-					System.out.println("TIE!");
-
+				} else if (cpuWeapon.equals("s")) {
+					displayer.printTie(input);
 				}
 			}
-			currentRound++;
+
+			if (input.equals("r") || input.equals("p") || input.equals("s")) {
+				currentRound++;
+			}
 		}
-		
-		System.out.println("GAME OVER!");
-		System.out.println("Your score:" + userScore + "CPU score: " + cpuScore);
+
+		displayer.printMatchInfo(cpuScore, userScore);
 
 	}
 }
