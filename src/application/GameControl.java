@@ -10,6 +10,10 @@ public class GameControl {
 
 	public static void main(String[] args) {
 		RPSDisplayer displayer = new RPSDisplayer();
+		Player cpuPlayer = new Player();
+		Player userPlayer = new Player();
+
+		
 		int rounds = Integer.parseInt(args[0]);
 		int currentRound = 1;
 		String input;
@@ -23,52 +27,64 @@ public class GameControl {
 			displayer.printRoundMessage(currentRound);
 
 			input = scan.nextLine();
-			String cpuWeapon = weapons[rand.nextInt(3)];
-
+			
 			if (input.equals("h")) {
 				displayer.printHelpInfo();
 			} else if (input.equals("e")) {
 				currentRound = rounds+1;
 			} else if (input.equals("m")) {
 				displayer.printMatchInfo(cpuScore, userScore);
-			} else if (input.equals("r")) {
-				if (cpuWeapon.equals("r")) {
-					displayer.printTie(input);
-				} else if (cpuWeapon.equals("p")) {
-					displayer.printLoss(input, cpuWeapon);
-					cpuScore++;
-				} else if (cpuWeapon.equals("s")) {
-					displayer.printWin(input, cpuWeapon);
-					userScore++;
-				}
-			} else if (input.equals("p")) {
-				if (cpuWeapon.equals("r")) {
-					displayer.printWin(input, cpuWeapon);
-					userScore++;
-				} else if (cpuWeapon.equals("p")) {
-					displayer.printTie(input);
-				} else if (cpuWeapon.equals("s")) {
-					displayer.printLoss(input, cpuWeapon);
-					cpuScore++;
-				}
-			} else if (input.equals("s")) {
-				if (cpuWeapon.equals("r")) {
-					displayer.printLoss(input, cpuWeapon);
-					cpuScore++;
-				} else if (cpuWeapon.equals("p")) {
-					displayer.printWin(input, cpuWeapon);
-					userScore++;
-				} else if (cpuWeapon.equals("s")) {
-					displayer.printTie(input);
-				}
-			}
+			} else if (input.equals("r") || input.contentEquals("p") || input.contentEquals("s")) {
+				userPlayer.generateWeapon(input);
+				cpuPlayer.generateWeapon(weapons[rand.nextInt(3)]);
+		        int compare = 0;
+		        switch (userPlayer.getWeapon()) {
+		            case ROCK:
+		                switch (cpuPlayer.getWeapon()) {
+		                    case PAPER:
+		                        compare = -1;
+		                        break;
+		                    case SCISSORS:
+		                        compare = 1;
+		                        break;
+		                }
+		                break;
+		            case PAPER:
+		                switch (cpuPlayer.getWeapon()) {
+		                    case SCISSORS:
+		                        compare = -1;
+		                        break;
+		                    case ROCK:
+		                        compare = 1;
+		                        break;
+		                }
+		                break;
+		            case SCISSORS:
+		                switch (cpuPlayer.getWeapon()) {
+		                    case ROCK:
+		                        compare = -1;
+		                        break;
+		                    case PAPER:
+		                        compare = 1;
+		                        break;
+		                }
+		                break;
+		        }
+		        if(compare == 0) {
+					displayer.printTie(userPlayer.getWeapon());
 
-			if (input.equals("r") || input.equals("p") || input.equals("s")) {
+		        } else if(compare == 1) {
+					displayer.printWin(userPlayer.getWeapon(), cpuPlayer.getWeapon());
+					userScore++;
+		        } else if(compare == -1) {
+					displayer.printLoss(userPlayer.getWeapon(), cpuPlayer.getWeapon());
+					cpuScore++;
+		        }
 				currentRound++;
+			}  else {
+				displayer.printInvalid();
 			}
 		}
-
 		displayer.printMatchInfo(cpuScore, userScore);
-
 	}
 }

@@ -74,7 +74,7 @@ public class RPSDisplayer {
      * @param weapon1 user's Weapon
      * @param weapon2 cpu's Weapon
      */
-    public void printWin(String userWeapon, String cpuWeapon) {
+    public void printWin(Weapon userWeapon, Weapon cpuWeapon) {
         System.out.println("User threw: " + userWeapon + "!\t CPU threw: " + cpuWeapon + "!" + "\nUser Wins!");
     }
 
@@ -83,7 +83,7 @@ public class RPSDisplayer {
      * @param weapon1
      * @param weapon2
      */
-    public void printLoss(String userWeapon, String cpuWeapon) {
+    public void printLoss(Weapon userWeapon, Weapon cpuWeapon) {
         System.out.println("User threw: " + userWeapon + "!\t CPU threw: " + cpuWeapon + "!" + "\nCPU Wins!");
     }
 
@@ -91,7 +91,7 @@ public class RPSDisplayer {
      * Prints that user tied
      * @param weapon1 User's Weapon which is the same as CPU's weapon.
      */
-    public void printTie(String weapon) {
+    public void printTie(Weapon weapon) {
         System.out.println("User threw: " + weapon + "!\t CPU threw: " + weapon + "!" + "\nIt's a Tie!");
     }
    
