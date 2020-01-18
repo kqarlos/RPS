@@ -18,6 +18,51 @@ public enum Weapon {
      */
     SCISSORS;
 
+	
+	   /**
+     * Compares the weapons given.
+     * @param weapon1 User's weapon.
+     * @return Numerical value indicating win, loss, or tie.
+     */
+    public int compare(Weapon weapon) {
+
+        int compare = 0;
+
+        switch (this) {
+            case ROCK:
+                switch (weapon) {
+                    case PAPER:
+                        compare = -1;
+                        break;
+                    case SCISSORS:
+                        compare = 1;
+                        break;
+                }
+                break;
+            case PAPER:
+                switch (weapon) {
+                    case SCISSORS:
+                        compare = -1;
+                        break;
+                    case ROCK:
+                        compare = 1;
+                        break;
+                }
+                break;
+            case SCISSORS:
+                switch (weapon) {
+                    case ROCK:
+                        compare = -1;
+                        break;
+                    case PAPER:
+                        compare = 1;
+                        break;
+                }
+                break;
+        }
+        return compare;
+    }
+	
     @Override
     public String toString() {
         String wString = "";

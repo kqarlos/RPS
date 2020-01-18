@@ -2,7 +2,6 @@ package application;
 
 /**
  * Displays information and contains the main method that runs and updates the game.
-
  */
 public class RPSDisplayer {
 
