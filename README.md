@@ -3,7 +3,8 @@
 ## Getting Started
 
 Steps to install application:
-1. 
+1. Got to src directory
+2. Run java application.Gamecontrol [number of Rounds]
 
 ## Site Pictures
 

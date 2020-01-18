@@ -23,10 +23,10 @@ public class GameControl {
 			System.out.println("Round " + currentRound);
 
 			input = scan.nextLine();
-
-			char cpuWeapon = weapons[rand.nextInt(2) + 1];
-
-			if (input.equals('r')) {
+			char cpuWeapon = weapons[rand.nextInt(3)];
+			System.out.println("Your weapon: " + input);
+			System.out.println("CPU's weapon: " + cpuWeapon);
+			if (input.equals("r")) {
 				if (cpuWeapon == 'r') {
 					System.out.println("TIE!");
 				} else if (cpuWeapon == 'p') {
@@ -37,7 +37,7 @@ public class GameControl {
 					userScore++;
 
 				}
-			} else if (input.equals('p')) {
+			} else if (input.equals("p")) {
 				if (cpuWeapon == 'r') {
 					System.out.println("WIN!");
 					userScore++;
@@ -47,7 +47,7 @@ public class GameControl {
 					System.out.println("LOOSE!");
 					cpuScore++;
 				}
-			} else if (input.equals('s')) {
+			} else if (input.equals("s")) {
 				if (cpuWeapon == 'r') {
 					System.out.println("LOOSE!");
 					cpuScore++;
