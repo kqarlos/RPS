@@ -6,6 +6,10 @@ package application;
 public class Player {
 
     private Weapon weapon;
+    
+    public Player() {
+    	
+    }
 
     /**
      * Returns the weapon

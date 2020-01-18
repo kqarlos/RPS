@@ -36,7 +36,7 @@ public class RPSDisplayer {
      * @return the message
      */
     public void printRoundMessage(int rounds){
-        System.out.println("Round " + rounds + ". " + roundMessage);
+        System.out.println("\nRound " + rounds + ". " + roundMessage);
     }
     
     /**
@@ -50,8 +50,8 @@ public class RPSDisplayer {
      * Prints current match information.
      * @param matchInfo 
      */
-    public void printMatchInfo(int cpuScore, int userScore) {
-        System.out.println("CPU Score: " + cpuScore + "\nUser Score: " + userScore);
+    public void printMatchInfo(String matchInfo) {
+        System.out.println(matchInfo);
     }
 
     /**
